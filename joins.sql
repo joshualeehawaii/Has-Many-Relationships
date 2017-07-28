@@ -35,15 +35,27 @@ FROM comments INNER JOIN posts ON comments.posts_id = posts.id
 WHERE posts.created_at < '2015-01-01';
 
 --9. Create a query to get the all rows in the comments table, showing post title (aliased as post_title), post url (ailased as post_url), and the comment body (aliased as comment_body) where the post was created after January 1, 2015
-
+SELECT comments.*, posts.title AS "post_tile", posts.url AS "post_url", comments.body AS "comment_body"
+FROM comments INNER JOIN posts ON comments.posts_id = posts.id
+WHERE posts.created_at < '2015-01-01';
 
 --10. Create a query to get the all rows in the comments table, showing post title (aliased as post_title), post url (ailased as post_url), and the comment body (aliased as comment_body) where the comment body contains the word 'USB'
-
+SELECT comments.*, posts.title AS "post_tile", posts.url AS "post_url", comments.body AS "comment_body"
+FROM comments INNER JOIN posts ON comments.posts_id = posts.id
+WHERE comments.body LIKE '%USB%';
 
 --11. Create a query to get the post title (aliased as post_title), first name of the author of the post, last name of the author of the post, and comment body (aliased to comment_body), where the comment body contains the word 'matrix' ( should have 855 results )
-
+SELECT posts.title AS "post_title", users.first_name, users.last_name, comments.body AS "comment_body"
+FROM ((users
+INNER JOIN posts ON posts.user_id = users.id)
+INNER JOIN comments ON comments.posts_id = posts.id)
+WHERE comments.body LIKE '%matrix%';
 
 --12. Create a query to get the first name of the author of the comment, last name of the author of the comment, and comment body (aliased to comment_body), where the comment body contains the word 'SSL' and the post content contains the word 'dolorum' ( should have 102 results )
-
+SELECT users.first_name, users.last_name, comments.body AS "comment_body"
+FROM ((users
+INNER JOIN posts ON posts.user_id = users.id)
+INNER JOIN comments ON comments.posts_id = posts.id)
+WHERE comments.body LIKE '%SSL%' AND posts.content LIKE '%dolorum%';
 
 --13. Create a query to get the first name of the author of the post (aliased to post_author_first_name), last name of the author of the post (aliased to post_author_last_name), the post title (aliased to post_title), username of the author of the comment (aliased to comment_author_username), and comment body (aliased to comment_body), where the comment body contains the word 'SSL' or 'firewall' and the post content contains the word 'nemo' ( should have 218 results )
