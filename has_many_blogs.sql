@@ -20,7 +20,6 @@ CREATE TABLE users (
 );
 
 --Posts
---DROP TABLE IF EXISTS posts;
 CREATE TABLE posts (
   id SERIAL NOT NULL PRIMARY KEY,
   title VARCHAR(180) DEFAULT NULL,
@@ -32,7 +31,6 @@ CREATE TABLE posts (
 );
 
 --Comments
---DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
   id SERIAL NOT NULL PRIMARY KEY,
   body VARCHAR(510) DEFAULT NULL,
